@@ -1,0 +1,15 @@
+
+.btn-success {
+    border-radius: 0; /* Bordes cuadrados para el botón */
+    background-color: #28a745; /* Color verde específico para el botón */
+}
+
+.btn-block {
+    display: block; /* Asegura que el botón sea de ancho completo */
+    width: 100%;
+}
+
+body {
+    background: #232526;
+    /*background: linear-gradient(to right, #414345, #232526);*/
+}
