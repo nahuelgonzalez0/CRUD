@@ -14,9 +14,15 @@ router.route('/create')
 
     .post(async (req: Request, res: Response) => {
       const {title, description} = req.body
-      const newTask = await createTable(title, description)
-      console.log("objeto: ", newTask)
+      if (title === "" || description === "") {
+        console.log("Completa todos los campos")
+        res.render('tasks/create', { errorMessage: 'Completa todos los campos' })
+      } else {
+        const status = 'pending' 
+        const newTask = await createTable(title, description, status)
+        console.log("objeto: ", newTask)
        res.redirect('/tasks/list')
+      }
     })
 
     router.route('/list')   
@@ -58,13 +64,17 @@ router.route('/create')
     //verificar esto y el edit.hbs
     .post(async (req: Request, res: Response) => {
         const { id } = req.query
-        const { title, description } = req.body
+        const { title, description, status } = req.body
         if (typeof id === 'string') {
-            await updateTask(title, description, id)
-            res.redirect('/tasks/list')
+            if (title === "" || description === "") {
+                console.log("Completa todos los campos")
+                const task = { id, title, description, status }
+                res.render('tasks/edit', { task, errorMessage: 'Completa todos los campos' })
+              } else {
+                await updateTask(title, description, status, id)
+                res.redirect('/tasks/list')
+              }
         }
     })
-    
-
 
 export default router

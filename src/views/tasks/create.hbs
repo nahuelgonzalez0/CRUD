@@ -3,6 +3,13 @@
         <div class="card">
             <div class="card-body">
                 <form action="/tasks/create" method="POST">
+                    <!-- Mostrar mensaje de error si existe -->
+                    {{#if errorMessage}}
+                        <div class="alert alert-danger">
+                            {{errorMessage}}
+                        </div>
+                    {{/if}}
+
                     <div class="form-group mb-3">
                        <input type="text" name="title" placeholder="Write your title" class="form-control" autofocus>
                     </div>
@@ -18,3 +25,4 @@
         </div>
     </div>
 </div>
+
