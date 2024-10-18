@@ -6,4 +6,5 @@ La aplicación permite a los usuarios realizar las siguientes operaciones:
 - **Crear** tareas con un título y una descripción.
 - **Listar** todas las tareas almacenadas en la base de datos.
 - **Actualizar** tareas existentes.
+-  **Filtrar** tareas de la base de datos por su titulo o por su estado.
 - **Eliminar** tareas de la base de datos.
