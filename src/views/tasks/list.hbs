@@ -1,21 +1,36 @@
-<div class="row">
-    {{#each tasks as |task|}}
-    <div class="col-md-3 mb-3">
-        <div class="card">
-            <div class="card-body">
-                <h3>{{task.title}}</h3> <!-- Asegúrate de referenciar correctamente las propiedades -->
-                <p>{{task.description}}</p>
-                <p>Status: <strong>{{task.status}}</strong></p> <!-- Agregado para mostrar el estado -->
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <a href="/tasks/delete?id={{task.id}}" class="btn btn-danger"> <!-- Incluye el ID en la URL -->
-                    Delete
-                </a>
-                <a href="/tasks/edit?id={{task.id}}" class="btn btn-secondary">
-                    Edit
-                </a>
+<div class="container">
+    <h1>Lista de Tareas</h1>
+    
+    <!-- Menú de filtros -->
+    <form action="/tasks/list" method="GET">
+        <div class="mb-3">
+            <label for="filter">Filtros:</label>
+            <select id="filter" name="filter" class="form-select">
+                <option value="status">Estado</option>
+                <option value="title">Título</option>
+            </select>
+        </div>
+
+        <!-- Botón para aplicar filtros -->
+        <button type="submit" class="btn btn-primary">Aplicar Filtro</button>
+    </form>
+
+    <!-- Lista de tareas -->
+    <div class="row mt-4">
+        {{#each tasks as |task|}}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="task-name">{{task.title}}</h3>
+                    <p>{{task.description}}</p>
+                    <p>Status: <strong class="task-status">{{task.status}}</strong></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <a href="/tasks/delete?id={{task.id}}" class="btn btn-danger">Delete</a>
+                    <a href="/tasks/edit?id={{task.id}}" class="btn btn-secondary">Edit</a>
+                </div>
             </div>
         </div>
+        {{/each}}
     </div>
-    {{/each}}
 </div>

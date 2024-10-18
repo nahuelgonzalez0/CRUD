@@ -28,9 +28,26 @@ router.route('/create')
     router.route('/list')   
     .get(async (req: Request, res: Response) => {
         try {
-            const tasks = await listTasks(null)
-            console.log(tasks)
-            res.render('tasks/list', {tasks})
+            const {filter, value} = req.query
+            if (filter) {
+                if (filter == 'title') {
+                    //filtro para el tituloS
+                    console.log(filter)
+                    const tasks = await listTasks(null, filter, null)
+                    console.log(tasks)
+                    res.render('tasks/list', {tasks})
+                } else if (filter == 'status') {
+                    //filtro para el status
+                    console.log(filter)
+                    const tasks = await listTasks(null, null, filter)
+                    console.log(tasks)
+                    res.render('tasks/list', {tasks})
+                }
+            } else {
+                const tasks = await listTasks(null, null, null)
+                console.log(tasks)
+                res.render('tasks/list', {tasks})
+            }
         } catch (e) {
             console.error('Error al obtener las tareas:', e);
             res.status(500).send('Error al obtener las tareas')
@@ -57,7 +74,7 @@ router.route('/create')
     .get(async (req: Request, res: Response) => {
         const { id } = req.query
         if (typeof id === 'string') {
-            const task = await listTasks(id)
+            const task = await listTasks(id, null, null)
             res.render('tasks/edit', { task })
         }
     })

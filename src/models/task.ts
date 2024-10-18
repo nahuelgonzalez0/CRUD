@@ -36,12 +36,12 @@ import connect  from '../database'
     }
 }
 
-export async function listTasks (id : string | null) {
+export async function listTasks (id : string | null, title : string | null, status : string | null) {
     const db = await connect();
 
     if (db !== null) {
         try {
-            if (typeof id !== "string" ) {
+            if (typeof id !== "string" && typeof title !== "string" && typeof status !== "string" ) {
                // consulta para obtener todas las filas de la tabla 'items'
             const task = await db.all(`
                 SELECT id, title, description, status
@@ -49,16 +49,38 @@ export async function listTasks (id : string | null) {
             `)
             return task  // Devuelve el array de tareas 
             } else {
-
-                // Consulta SQL para obtener la tarea por ID
-                const task = await db.get(`
-                    SELECT id, title, description, status
-                    FROM items
-                    WHERE id = ?
-                `, [id])
-                return task; 
+                if (typeof title !== "string" && typeof status !== "string" ) {
+                    // Consulta SQL para obtener la tarea por ID
+                    const task = await db.all(`
+                        SELECT id, title, description, status
+                        FROM items
+                        WHERE id = ?
+                    `, [id])
+                    return task; 
+                    } else if (typeof title === "string"){
+                    // Consulta SQL para obtener la tarea por TITLE
+                    const task = await db.all(`
+                        SELECT id, title, description, status
+                        FROM items
+                        ORDER BY title ASC
+                    `,)
+                    return task; 
+                    } else {
+                        // Consulta SQL para obtener la tarea por STATUS
+                        const tasks = await db.all(`
+                            SELECT id, title, description, status
+                            FROM items
+                            WHERE status IN ('completed', 'in progress', 'pending')
+                            ORDER BY 
+                                CASE status 
+                                    WHEN 'completed' THEN 1
+                                    WHEN 'in progress' THEN 2
+                                    WHEN 'pending' THEN 3
+                                END
+                        `,);
+                        return tasks; 
+                    }
             }
-
         } catch (e) {
             console.log('Error al listar las tareas:', (e as Error).message);
             return []
