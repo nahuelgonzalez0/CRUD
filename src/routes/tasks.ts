@@ -24,7 +24,7 @@ router.route('/create')
        res.redirect('/tasks/list')
       }
     })
-
+    
     router.route('/list')   
     .get(async (req: Request, res: Response) => {
         try {
@@ -74,7 +74,9 @@ router.route('/create')
     .get(async (req: Request, res: Response) => {
         const { id } = req.query
         if (typeof id === 'string') {
-            const task = await listTasks(id, null, null)
+            const tasks = await listTasks(id, null, null) // devuelve un array
+            const task = tasks [0]
+            console.log(task); 
             res.render('tasks/edit', { task })
         }
     })

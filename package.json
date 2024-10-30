@@ -1,26 +1,26 @@
 {
   "devDependencies": {
     "@types/express": "^4.17.21",
-    "eslint": "^9.10.0",
-    "express": "^4.20.0",
-    "nodemon": "^3.1.4",
-    "typescript": "^5.6.2"
+    "@types/express-handlebars": "^6.0.2",
+    "@types/morgan": "^1.9.9",
+    "eslint": "^9.13.0",
+    "nodemon": "^3.1.7",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3"
   },
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "public": "ncp ./src/public/ ./build/public/",
     "hbscopy": "ncp ./src/views/ ./build/views/",
-    "clean": "rimraf ./build", 
-    "build" : "npm run clean && tsc && npm run public && npm run hbscopy",
-    "start" : "node build/index.js"
+    "clean": "rimraf ./build",
+    "build": "npm run clean && tsc && npm run public && npm run hbscopy",
+    "start": "node build/index.js"
   },
   "dependencies": {
-    "@types/express-handlebars": "^6.0.0",
-    "@types/morgan": "^1.9.9",
+    "express": "^4.21.1",
     "morgan": "^1.10.0",
     "ncp": "^2.0.0",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7",
-    "ts-node-dev": "^2.0.0"
+    "sqlite3": "^5.1.7"
   }
 }
