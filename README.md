@@ -8,3 +8,18 @@ La aplicación permite a los usuarios realizar las siguientes operaciones:
 - **Actualizar** tareas existentes.
 -  **Filtrar** tareas de la base de datos por su titulo o por su estado.
 - **Eliminar** tareas de la base de datos.
+
+## Dependencias
+Este proyecto utiliza las siguientes dependencias:
+- **express**
+- **morgan**
+- **ncp**
+- **sqlite**
+- **sqlite3**
+
+### Instalación de dependencias
+
+Para instalar las dependencias necesarias, ejecuta el siguiente comando:
+
+```bash
+npm install express@^4.21.1 morgan@^1.10.0 ncp@^2.0.0 sqlite@^5.1.1 sqlite3@^5.1.7
