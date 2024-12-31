@@ -8,6 +8,10 @@ La aplicación permite a los usuarios realizar las siguientes operaciones:
 - **Actualizar** tareas existentes.
 -  **Filtrar** tareas de la base de datos por su titulo o por su estado.
 - **Eliminar** tareas de la base de datos.
+-  **Autenticación**  usuarios mediante JWT almacenado en cookies para garantizar la seguridad.
+
+# Autenticación JWT mediante Cookies
+La aplicación incluye un sistema de autenticación que utiliza JWT para verificar la identidad de los usuarios. El token JWT se almacena de manera segura en una cookie del navegador, y las rutas protegidas requieren que el token sea válido para permitir el acceso.
 
 ## Dependencias
 Este proyecto utiliza las siguientes dependencias:
@@ -16,10 +20,13 @@ Este proyecto utiliza las siguientes dependencias:
 - **ncp**
 - **sqlite**
 - **sqlite3**
+- **bcrypt**
+- **cookie-parser**
+- **jsonwebtoken**
 
 ### Instalación de dependencias
 
 Para instalar las dependencias necesarias, ejecuta el siguiente comando:
 
 ```bash
-npm install express@^4.21.1 morgan@^1.10.0 ncp@^2.0.0 sqlite@^5.1.1 sqlite3@^5.1.7
+npm install express@^4.21.1 morgan@^1.10.0 ncp@^2.0.0 sqlite@^5.1.1 sqlite3@^5.1.7 bcrypt@^5.1.1 cookie-parser@^1.4.7 jsonwebtoken@^9.0.2
